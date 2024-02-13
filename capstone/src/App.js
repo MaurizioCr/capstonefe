@@ -1,6 +1,7 @@
 import './App.css'
 // importiamo il foglio CSS di bootstrap, UNA VOLTA SOLA in App.js
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'animate.css';
 
 // importiamo i componenti da noi scritti
 // senza { } perchè tutti i miei componenti li esporto come "default"
@@ -14,6 +15,7 @@ import Register from './Components/Register'
 import Feedback from './Components/Feedback'
 import MyNavbar from './Components/MyNavbar'
 import Social from './Components/Social'
+import Storia from './Components/Storia'
 
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
             <Route element={<Register />} path="/register" />
             <Route element={<Feedback/>} path="/feedback"/>
             <Route element={<Social/>} path="/social"/>
+            <Route element={<Storia/>} path="/storia"/>
             
             {/* questa qui sopra è una rotta PARAMETRICA, che sfrutta l'operatore : per dare un nome generico
             a tutto quello che verrà dopo /detail/ */}
