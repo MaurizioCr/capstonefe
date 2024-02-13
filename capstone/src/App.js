@@ -12,6 +12,8 @@ import NotFound from './Components/NotFound'
 import Login from './Components/Login'
 import Register from './Components/Register'
 import Feedback from './Components/Feedback'
+import MyNavbar from './Components/MyNavbar'
+import Social from './Components/Social'
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
 
         {/* ora è il momento di inserire il contenuto principale della landing page! */}
         <div className="flex-grow-1">
+        <MyNavbar/>
           <Routes>
             {/* cosa deve contenere una Route? deve contenere COSA montare (che componente) e DOVE montarlo (la rotta) */}
             {/* il path "/" indica la homepage, es. localhost:3000, www.sitodistefano.com */}
@@ -31,6 +34,7 @@ function App() {
             <Route element={<Login />} path="/login" />
             <Route element={<Register />} path="/register" />
             <Route element={<Feedback/>} path="/feedback"/>
+            <Route element={<Social/>} path="/social"/>
             
             {/* questa qui sopra è una rotta PARAMETRICA, che sfrutta l'operatore : per dare un nome generico
             a tutto quello che verrà dopo /detail/ */}

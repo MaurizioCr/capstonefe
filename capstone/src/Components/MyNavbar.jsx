@@ -36,7 +36,7 @@ const LoginPrompt = styled.div`
 `;
 
 
-const Home = ({ children }) => {
+const Prova = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isAuthenticated = !!localStorage.getItem("authToken");
@@ -49,15 +49,16 @@ const Home = ({ children }) => {
 
   return (
     <StyledHeader>
-      {/* <Navbar className="justify-content-end grigio">
+      <Navbar className="justify-content-end grigio">
         <Container className='text-right'>
-          <Navbar.Brand to="/"><h2>LastWorld</h2></Navbar.Brand>
+          <Link className={location.pathname === '/login' ? 'nav-link active' : 'nav-link'}
+                    to="/"><h2 >LastWorld</h2></Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end contentend">
             <Nav className="ml-auto">
               {isAuthenticated ? (
                 <>
-                  <Link onClick={logout} className="nav-link">
+                  <Link onClick={logout} className="nav-link" to="/">
                     Logout
                   </Link>
                   {children}
@@ -81,28 +82,9 @@ const Home = ({ children }) => {
             </Nav>
           </Navbar.Collapse>
         </Container>
-      </Navbar> */}
-  
-      {!isAuthenticated && (
-        <LoginPrompt>
-          <p>Accedi per vedere i contenuti</p>
-        </LoginPrompt>
-      )}
-  
-      {isAuthenticated && (
-        <Container>
-          <Row className='justify-content-center'>
-            <Col className="col1 mx-3 p-4 border border-black b mt-5 text-center" md={{ span: 2, offset: 2 }}><p className='hover' onClick={() => navigate("/Update")}>Update</p></Col>
-            <Col className="col1 mx-3 p-4 border border-black b mt-5 text-center" md="2"><p className='hover' onClick={()=> navigate("/Storia")}>Storia</p></Col>
-            <Col className="col1 mx-3 p-4 border border-black b mt-5 text-center" md="2"><p className='hover' onClick={() => navigate("/Feedback")}>Feedback</p></Col>
-            <Col className="col1 mx-3 p-4 border border-black b mt-5 text-center" md="2"><p className='hover' onClick={()=> navigate("/Social")}>Social</p></Col>
-          </Row>
-        </Container>
-      )}
+      </Navbar>
     </StyledHeader>
   );
-  
 };
 
-export default Home;
-
+export default Prova;
