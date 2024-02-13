@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Card, Stack } from 'react-bootstrap';
+import { Form, Button, Card, Stack, Col, Row, Container } from 'react-bootstrap';
 
 const Feedback = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [feedback, setFeedback] = useState("");
   const [votoFeedback, setVotoFeedback] = useState(6);
-
+    
   useEffect(() => {
     // Fetch per ottenere tutti i feedbacks
     const fetchFeedbacks = async () => {
@@ -58,14 +58,16 @@ const Feedback = () => {
 };
 
 
-  return (
+return (
     <div>
-      <h2>Feedback Page</h2>
+      <Container className=''>
+      <h2 className='text-white text-center'>Feedback </h2>
       
       <Form>
         <Form.Group controlId="formFeedback">
-          <Form.Label>Aggiungi Feedback</Form.Label>
+          <Form.Label className='text-white'>Aggiungi Feedback</Form.Label>
           <Form.Control
+            className='bb'
             as="textarea"
             rows={3}
             placeholder="Inserisci il tuo feedback"
@@ -75,7 +77,7 @@ const Feedback = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formVoto">
+        <Form.Group className='bb' controlId="formVoto">
           <Form.Label>Voto</Form.Label>
           <Form.Control
             type="number"
@@ -86,26 +88,34 @@ const Feedback = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" onClick={handleAddFeedback}>
+        <Button variant="primary mt-3" onClick={handleAddFeedback}>
           Aggiungi Feedback
         </Button>
       </Form>
+      </Container>
 
+        <Container className='mt-3'>
+        <Row>
       {Array.isArray(feedbacks) && feedbacks.map((feedback) => (
-        <Stack className='bg-secondary' key={feedback.id} gap={3}>
+        <Col className='bg-secondary relative col-12 col-lg-3 pt-2 border' key={feedback.id}>
+        
    
             <div className='text-white'>
-            <p>Contenuto: {feedback.feedback}</p>
+            <p>Recensione: {feedback.feedback}</p>
             <p>Voto: {feedback.votoFeedback}</p>
-            <p>Utente: {feedback.utente.username}</p>
+            <p className='absolute'>Utente: {feedback.utente.username}</p>           
             </div>
-            <hr/>
-            </Stack>
+            
+            
+            </Col>
         
 ))}
+            </Row>
+            </Container>
 
     </div>
   );
 };
 
 export default Feedback;
+

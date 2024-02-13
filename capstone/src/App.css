@@ -20,6 +20,12 @@ body{
   background-position-x: center;
 }
 
+.bb{
+  width: 60% !important;
+  
+
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
