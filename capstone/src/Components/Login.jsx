@@ -44,9 +44,14 @@ export default function Login() {
         }
       })
       .then((data) => {
+        //Controlli token ed id
+        console.log("Risposta del server:", data);
+        const userId = data.id; 
         localStorage.setItem("authToken", data.token);
+        localStorage.setItem("userId", userId);
         navigate("/");
       })
+      
       .catch((err) => console.log("ERRORE!", err));
   }
   return (

@@ -58,6 +58,7 @@ const Prova = ({ children }) => {
             <Nav className="ml-auto">
               {isAuthenticated ? (
                 <>
+                  <Link className='nav-link' to="/profile">Vai al tuo profilo</Link>
                   <Link onClick={logout} className="nav-link" to="/">
                     Logout
                   </Link>

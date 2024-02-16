@@ -19,6 +19,7 @@ const Feedback = () => {
         if (response.ok) {
           const data = await response.json();
           setFeedbacks(data);
+          console.log(localStorage.getItem("authToken"))
         } else {
           console.error('Errore durante il recupero dei feedbacks.');
         }
