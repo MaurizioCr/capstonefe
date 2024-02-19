@@ -6,6 +6,7 @@ const UserProfile = () => {
   const [updatedUser, setUpdatedUser] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [avatarFile, setAvatarFile] = useState(null);
+  const [inputValues, setInputValues] = useState({});
   const [saveClicked, setSaveClicked] = useState(false);
 
   useEffect(() => {
@@ -45,7 +46,6 @@ const UserProfile = () => {
       console.error('Error fetching user data:', error);
     }
   };
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -106,13 +106,9 @@ const UserProfile = () => {
             avatar: avatarUrl,
           }));
   
-          // Aggiorna il localStorage con il nuovo URL dell'avatar
+          // Aggiorna il localStorage con il nuovo URL dell'avatar per evitare problemi con la pagine
           localStorage.setItem('userAvatar', avatarUrl);
-  
-          
-  
-  
-          // Aggiorna anche updatedUser.avatar se stai mantenendo l'avatar aggiornato in modalità di modifica
+
           setUpdatedUser({
             ...updatedUser,
             avatar: avatarUrl,
@@ -125,7 +121,7 @@ const UserProfile = () => {
         }
       }
   
-      // Dopo l'upload dell'immagine, procedi con l'aggiornamento del profilo
+      // Dopo l'upload dell'immagine, procedo con l'aggiornamento del profilo
       // Update user data
       const updateUserResponse = await fetch(`${process.env.REACT_APP_BACKEND}/users/update/${userId}`, {
         method: 'PUT',
@@ -140,7 +136,7 @@ const UserProfile = () => {
         const updatedUserData = await updateUserResponse.json();
         console.log(updatedUserData);
   
-        // Aggiorna user con le altre proprietà utente
+
         setUser((prevUser) => ({
           ...prevUser,
           nome: updatedUserData.nome,
@@ -149,7 +145,7 @@ const UserProfile = () => {
           username: updatedUserData.username,
         }));
   
-        // Aggiorna anche updatedUser se stai mantenendo l'utente aggiornato in modalità di modifica
+
         setUpdatedUser({});
   
         console.log('User data updated successfully');
