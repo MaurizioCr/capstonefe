@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Col, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
 
 const UserProfile = () => {
-  const [user, setUser] = useState({});
-  const [updatedUser, setUpdatedUser] = useState({});
-  const [editMode, setEditMode] = useState(false);
-  const [avatarFile, setAvatarFile] = useState(null);
-  const [inputValues, setInputValues] = useState({});
-  const [saveClicked, setSaveClicked] = useState(false);
+    const [user, setUser] = useState({});
+    const [updatedUser, setUpdatedUser] = useState({});
+    const [editMode, setEditMode] = useState(false);
+    const [avatarFile, setAvatarFile] = useState({});
+    const [saveClicked, setSaveClicked] = useState(false);
 
   useEffect(() => {
     fetchUserData();
@@ -15,11 +14,10 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (editMode && saveClicked && Object.keys(updatedUser).length > 0) {
-        handleUpdateProfile();
-        setSaveClicked(false); // Reset saveClicked
-      }
-    }, [editMode, saveClicked, updatedUser]);
-  
+      handleUpdateProfile();
+      setSaveClicked(false); // Reset saveClicked after handling update
+    }
+  }, [editMode, saveClicked, updatedUser]);
 
   const fetchUserData = async () => {
     try {
@@ -55,26 +53,12 @@ const UserProfile = () => {
     }));
   };
 
-
   const handleFileChange = (e) => {
     setAvatarFile(e.target.files[0]);
   };
-
-
-  const updateUserData = () => {
-    setEditMode(false);
-    setAvatarFile(null); 
-    setUser((prevUser) => ({
-      ...prevUser,
-      ...inputValues,
-    }));
-  };  
-
-
+  
   const handleUpdateProfile = async () => {
     try {
-        setSaveClicked(true);
-        updateUserData();
       const userId = localStorage.getItem("userId");
   
       if (!userId) {
@@ -82,7 +66,9 @@ const UserProfile = () => {
         return;
       }
   
-      // Controlla se è presente un file prima di procedere con l'upload
+      let avatarUrl = null;
+  
+      // Check if an avatar file is selected
       if (avatarFile) {
         // Upload avatar
         const formData = new FormData();
@@ -98,17 +84,15 @@ const UserProfile = () => {
   
         if (uploadAvatarResponse.ok) {
           const uploadedData = await uploadAvatarResponse.json();
-          const avatarUrl = uploadedData.imageUrl;
+          avatarUrl = uploadedData.imageUrl;
   
-          // Aggiorna user.avatar con il nuovo URL dell'avatar evitando il reload
+          // Update user avatar
           setUser((prevUser) => ({
             ...prevUser,
             avatar: avatarUrl,
           }));
   
-          // Aggiorna il localStorage con il nuovo URL dell'avatar per evitare problemi con la pagine
-          localStorage.setItem('userAvatar', avatarUrl);
-
+          // Update updatedUser.avatar if maintaining it in edit mode
           setUpdatedUser({
             ...updatedUser,
             avatar: avatarUrl,
@@ -118,10 +102,11 @@ const UserProfile = () => {
           console.log(updatedUser);
         } else {
           console.error('Error uploading avatar. Server response:', uploadAvatarResponse.status, uploadAvatarResponse.statusText);
+          return; // Stop further processing if avatar upload fails
         }
       }
   
-      // Dopo l'upload dell'immagine, procedo con l'aggiornamento del profilo
+      // Dopo l'upload dell'immagine o se non è stata selezionata alcuna immagine, procedi con l'aggiornamento del profilo
       // Update user data
       const updateUserResponse = await fetch(`${process.env.REACT_APP_BACKEND}/users/update/${userId}`, {
         method: 'PUT',
@@ -129,24 +114,30 @@ const UserProfile = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },
-        body: JSON.stringify(updatedUser),
+        body: JSON.stringify({
+          ...updatedUser,
+          avatar: avatarUrl, // Include the avatar URL if present
+        }),
       });
   
       if (updateUserResponse.ok) {
         const updatedUserData = await updateUserResponse.json();
         console.log(updatedUserData);
   
-
+        // Update user with other properties
         setUser((prevUser) => ({
           ...prevUser,
           nome: updatedUserData.nome,
           cognome: updatedUserData.cognome,
           email: updatedUserData.email,
           username: updatedUserData.username,
+          // Add other profile properties as needed
         }));
   
-
-        setUpdatedUser({});
+        // Update updatedUser if maintaining it in edit mode
+        setUpdatedUser({
+          // Add other profile properties as needed
+        });
   
         console.log('User data updated successfully');
       } else {
@@ -167,10 +158,10 @@ const UserProfile = () => {
     setEditMode(true);
   };
 
-  const handleSaveProfile = async () => {
+   const handleSaveProfile = async () => {
     try {
-      await handleUpdateProfile();
-      setEditMode(false);
+      await handleUpdateProfile(); // Call the function to update the profile
+      setEditMode(false); // Set editMode to false after handling update
     } catch (error) {
       console.error('Error saving profile:', error);
     }
@@ -213,7 +204,7 @@ const UserProfile = () => {
         </>
       ) : (
         <>
-        <button onClick={() => setEditMode(true)}>Modifica profilo</button>
+          <button onClick={handleEditProfile}>Modifica profilo</button>
         </>
       )}
     </div>
