@@ -33,6 +33,13 @@ const LoginPrompt = styled.div`
   
 `;
 
+const ZoomBox = styled.div`
+  transition: transform 0.3s ease-in-out;
+  
+  &:hover {
+    transform: scale(1.8); /* Aumenta la scala al 110% quando si passa sopra con il mouse */
+  }
+`;
 
 const Home = ({ children }) => {
   const location = useLocation();
@@ -57,10 +64,10 @@ const Home = ({ children }) => {
       {isAuthenticated && (
         <Container>
           <Row className='justify-content-center'>
-            <Col className="col1 mx-3 p-4 border border-black b mt-5 text-center" md={{ span: 2, offset: 2 }}><p className='hover' onClick={() => navigate("/Update")}>Update</p></Col>
-            <Col className="col1 mx-3 p-4 border border-black b mt-5 text-center" md="2"><p className='hover' onClick={()=> navigate("/Storia")}>Storia</p></Col>
-            <Col className="col1 mx-3 p-4 border border-black b mt-5 text-center" md="2"><p className='hover' onClick={() => navigate("/feedback")}>Feedback</p></Col>
-            <Col className="col1 mx-3 p-4 border border-black b mt-5 text-center" md="2"><p className='hover' onClick={()=> navigate("/Social")}>Social</p></Col>
+            <Col className="col1 col-md-4 col-lg-2 mx-3 p-4 border border-black b mt-5 text-center rounded" md={{ span: 2, offset: 2 }}><ZoomBox><p className='hover' onClick={() => navigate("/Update")}>Update</p></ZoomBox></Col>
+            <Col className="col1 col-md-4 col-lg-2 mx-3 p-4 border border-black b mt-5 text-center rounded" md="2"><ZoomBox><p className='hover' onClick={()=> navigate("/Storia")}>Storia</p></ZoomBox></Col>
+            <Col className="col1 col-md-4 col-lg-2 mx-3 p-4 border border-black b mt-5 text-center rounded" md="2"><ZoomBox><p className='hover' onClick={() => navigate("/feedback")}>Feedback</p></ZoomBox></Col>
+            <Col className="col1 col-md-4 col-lg-2 mx-3 p-4 border border-black b mt-5 text-center rounded" md="2"><ZoomBox><p className='hover' onClick={()=> navigate("/Social")}>Social</p></ZoomBox></Col>
           </Row>
         </Container>
       )}
