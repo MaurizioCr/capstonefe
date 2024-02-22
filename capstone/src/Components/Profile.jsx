@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Col, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
+import { Button, Col, Container, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
 
 const UserProfile = () => {
     const [user, setUser] = useState({});
@@ -168,46 +168,69 @@ const UserProfile = () => {
   };
 
   return (
-    <div>
-      <Col className='bg-secondary relative col-12 col-lg-3 pt-2 border' key={user.id}>
-        <div className='text-white'>
+    <>
+    <Container className='text-left'>
+    <Row className='justify-content-center'>
+      <Col className='bg-dark relative col-md-4 col-lg-3 pt-2 border border-danger ' key={user.id}>
+        <div className='text-white '>
           <p>Nome: {user.nome}</p>
           <p>Cognome: {user.cognome}</p>
-          <p className='absolute'>Username: {user.username}</p>
-          <p>Avatar: <img src={user.avatar} alt="avatar"></img></p>
-</div>
+          <p>Email: {user.email}</p>
+          <p>Username: {user.username}</p>
+          <div className='justify-content-center d-flex pb-3' >
+           <img  src={user.avatar} alt="avatar"></img>
+           </div>
+    </div>
       </Col>
+      </Row>
+      </Container>
+
 
       {editMode ? (
+        <Container className='text-center'>
+        <Row className='justify-content-center '>
+        <Col className='bg-black text-white relative col-12 col-md-4 col-lg-3 pt-2 border border-danger'>
         <>
-          <div>
+          <div className='testo'>
         <label>Email:</label>
         <input type="text" name="email" value={updatedUser.email} onChange={handleInputChange} />
       </div>
-      <div>
+      <div className='testo'>
         <label>Nome:</label>
             <input type="text" name="nome" value={updatedUser.nome || ''} onChange={handleInputChange} />
           </div>
-          <div>
+          <div className='testo'>
             <label>Cognome:</label>
             <input type="text" name="cognome" value={updatedUser.cognome || ''} onChange={handleInputChange} />
           </div>
-          <div>
+          <div className='testo'>
             <label>Username:</label>
             <input type="text" name="username" value={updatedUser.username || ''} onChange={handleInputChange} />
           </div>
-          <div>
+          <div className='testo'>
             <label>Avatar:</label>
             <input type="file" accept="image/*" onChange={handleFileChange} />
           </div>
-          <button onClick={handleSaveProfile}>Salva modifiche</button>
+          <button className='mt-3 rounded mb-1' onClick={handleSaveProfile}>Salva modifiche</button>
         </>
+          </Col>
+          </Row>
+        </Container>
       ) : (
         <>
-          <button onClick={handleEditProfile}>Modifica profilo</button>
+        <Container className='text-center'>
+        <Row className='justify-content-center '>
+        <Col className='bg-black text-white relative col-12 col-md-4 col-lg-3 pt-2 border border-danger'>
+          <button className='rounded mb-1' onClick={handleEditProfile}>Modifica profilo</button>
+          </Col>
+          </Row>
+        </Container>
         </>
+        
       )}
-    </div>
+        </>
+
+    
   );
 };
 

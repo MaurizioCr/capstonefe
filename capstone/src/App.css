@@ -26,6 +26,15 @@ body{
 
 }
 
+.testo{
+  display: flex!important;
+  flex-direction: column !important;
+}
+
+input{
+  box-shadow: 0 2px 2px 2px red !important;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
