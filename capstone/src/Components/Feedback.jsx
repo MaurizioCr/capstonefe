@@ -62,57 +62,57 @@ const Feedback = () => {
 return (
     <div>
       <Container className=''>
-      <h2 className='text-white text-center'>Feedback </h2>
+        <h2 className='text-white text-center'>Feedback </h2>
       
-      <Form>
-        <Form.Group controlId="formFeedback">
-          <Form.Label className='text-white'>Aggiungi Feedback</Form.Label>
-          <Form.Control
-            className='bb'
-            as="textarea"
-            rows={3}
-            placeholder="Inserisci il tuo feedback"
-            value={feedback}
-            onChange={(e) => setFeedback(e.target.value)}
-            required
-          />
-        </Form.Group>
+        <Form>
+          <Form.Group controlId="formFeedback">
+            <Form.Label className='text-white'>Aggiungi Feedback</Form.Label>
+            <Form.Control
+              className='bb'
+              as="textarea"
+              rows={3}
+              placeholder="Inserisci il tuo feedback"
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+              required
+            />
+          </Form.Group>
 
-        <Form.Group className='bb' controlId="formVoto">
-          <Form.Label>Voto</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Inserisci il voto"
-            value={votoFeedback}
-            onChange={(e) => setVotoFeedback(parseInt(e.target.value))}
-            required
-          />
-        </Form.Group>
+          <Form.Group className='bb' controlId="formVoto">
+            <Form.Label>Voto</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Inserisci il voto"
+              value={votoFeedback}
+              onChange={(e) => setVotoFeedback(parseInt(e.target.value))}
+              required
+            />
+          </Form.Group>
 
-        <Button variant="primary mt-3" onClick={handleAddFeedback}>
-          Aggiungi Feedback
-        </Button>
-      </Form>
+          <Button variant="primary mt-3" onClick={handleAddFeedback}>
+            Aggiungi Feedback
+          </Button>
+        </Form>
       </Container>
 
-        <Container className='mt-3 mb-5'>
+      <Container className='mt-3 mb-5'>
         <Row>
-      {Array.isArray(feedbacks) && feedbacks.map((feedback) => (
-        <Col className='bg-secondary relative col-12 col-lg-3 pt-2 border' key={feedback.id}>
+          {Array.isArray(feedbacks) && feedbacks.map((feedback) => (
+            <Col className='bg-secondary relative col-12 col-lg-3 pt-2 border' key={feedback.id}>
         
    
-            <div className='text-white'>
-            <p className='mb-2'>Recensione: {feedback.feedback}</p>
-            <p className='mb-2'>Voto: {feedback.votoFeedback}</p>
-            <p className='mb-2'>Utente: {feedback.utente.username}</p>           
-            </div>
+              <div className='text-white'>
+                <p className='mb-2'>Recensione: {feedback.feedback}</p>
+                <p className='mb-2'>Voto: {feedback.votoFeedback}</p>
+                <p className='mb-2'>Utente: {feedback.utente.username}</p>           
+              </div>
             
             
             </Col>
         
-))}
-            </Row>
-            </Container>
+          ))}
+        </Row>
+      </Container>
 
     </div>
   );

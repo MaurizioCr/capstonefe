@@ -86,41 +86,41 @@ const Prova = ({ children }) => {
             <h2 >LastWorld</h2>
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end contentend">
-          <Nav className="ml-auto d-flex">
-              {isAuthenticated ? (
-                <>
-                <div className='me-2 d-flex flex-column flex-md-row'>
-                  <Link className="nav-link d-block d-md-none" to="/profile">
-                    Profilo
-                  </Link>
-                  <Link className="nav-link d-block d-md-none" to="/buy">
-                    Acquista
-                  </Link>
-                  <Link onClick={logout} className="nav-link d-block d-md-none" to="/">
-                    Logout
-                  </Link>
-                  {children}
-                  <Dropdown className='d-none d-lg-block' show={showDropdown} align="" onToggle={(isOpen) => setShowDropdown(isOpen)}>
-                    <Dropdown.Toggle variant="link" id="dropdown-basic">
-                      {user.avatar ? (
-                        <img src={user.avatar} alt="avatar" style={{ borderRadius: '50%', width: '2em', height: '2em' }} />
-                      ) : (
-                        'Vai al tuo profilo'
-                      )}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item className="text-black" as={Link} to="/profile">
-                        Profilo
-                      </Dropdown.Item>
-                      <Dropdown.Item className="text-black" as={Link} to="/buy">
-                        Acquista
-                      </Dropdown.Item>
-                      <Dropdown.Item onClick={logout} className="text-black" as={Link} to="/buy">
-                        Logout
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end contentend">
+              <Nav className="ml-auto d-flex">
+                {isAuthenticated ? (
+                  <>
+                  <div className='me-2 d-flex flex-column flex-md-row'>
+                    <Link className="nav-link d-block d-md-none" to="/profile">
+                      Profilo
+                    </Link>
+                    <Link className="nav-link d-block d-md-none" to="/buy">
+                      Acquista
+                    </Link>
+                    <Link onClick={logout} className="nav-link d-block d-md-none" to="/">
+                      Logout
+                    </Link>
+                    {children}
+                    <Dropdown className='d-none d-lg-block' show={showDropdown} align="" onToggle={(isOpen) => setShowDropdown(isOpen)}>
+                      <Dropdown.Toggle variant="link" id="dropdown-basic">
+                        {user.avatar ? (
+                          <img src={user.avatar} alt="avatar" style={{ borderRadius: '50%', width: '2em', height: '2em' }} />
+                            ) : (
+                                  'Vai al tuo profilo'
+                            )}
+                     </Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item className="text-black" as={Link} to="/profile">
+                          Profilo
+                        </Dropdown.Item>
+                        <Dropdown.Item className="text-black" as={Link} to="/buy">
+                          Acquista
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={logout} className="text-black" as={Link} to="/buy">
+                          Logout
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </div>
                 </>
               ) : (
