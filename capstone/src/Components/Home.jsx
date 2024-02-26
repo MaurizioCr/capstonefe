@@ -57,7 +57,7 @@ const Home = ({ children }) => {
   
       {!isAuthenticated && (
         <LoginPrompt>
-          <p>Accedi per vedere i contenuti</p>
+          <p> <a className='text-black' href="/login">Accedi</a> per vedere i contenuti</p>
         </LoginPrompt>
       )}
   

@@ -95,16 +95,16 @@ return (
       </Form>
       </Container>
 
-        <Container className='mt-3'>
+        <Container className='mt-3 mb-5'>
         <Row>
       {Array.isArray(feedbacks) && feedbacks.map((feedback) => (
         <Col className='bg-secondary relative col-12 col-lg-3 pt-2 border' key={feedback.id}>
         
    
             <div className='text-white'>
-            <p>Recensione: {feedback.feedback}</p>
-            <p>Voto: {feedback.votoFeedback}</p>
-            <p className='absolute'>Utente: {feedback.utente.username}</p>           
+            <p className='mb-2'>Recensione: {feedback.feedback}</p>
+            <p className='mb-2'>Voto: {feedback.votoFeedback}</p>
+            <p className='mb-2'>Utente: {feedback.utente.username}</p>           
             </div>
             
             

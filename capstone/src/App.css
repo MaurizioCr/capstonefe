@@ -1,6 +1,10 @@
 .App {
   text-align: center;
 }
+html{
+  position: relative;
+  min-height: 97% !important;
+}
 
 .App-logo {
   height: 40vmin;
@@ -20,10 +24,16 @@ body{
   background-position-x: center;
 }
 
+p{
+  margin: 0 !important;
+}
+
 .bb{
   width: 60% !important;
-  
+}
 
+a{
+  text-decoration: none !important;
 }
 
 .testo{
@@ -33,6 +43,10 @@ body{
 
 input{
   box-shadow: 0 2px 2px 2px red !important;
+}
+
+.gioco{
+  background-size: contain;
 }
 
 .App-header {
@@ -68,4 +82,14 @@ input{
   to {
     transform: rotate(360deg);
   }
+}
+
+footer {
+  position: absolute !important;
+  top: 100% !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
