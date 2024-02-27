@@ -7,9 +7,12 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Col, Dropdown, Row } from 'react-bootstrap';
 
 const StyledHeader = styled.div`
-  .grigio {
-    background: rgba(128, 128, 128, 0.4) url(./Assets/foto1.jpg);
-  }
+
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Assicura che l'header rimanga sopra gli altri elementi */
+  background: rgba(128, 128, 128, 0.4);
+  
   .contentend {
     justify-content: end !important;
   }
@@ -21,15 +24,9 @@ const StyledHeader = styled.div`
   .hover {
     cursor: pointer;
   }
-`;
-
-const LoginPrompt = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  background-color: rgba(255, 255, 255, 0.8);
-  margin-top: 20px;
+  .immagine{
+    width: contain;
+  }
 `;
 
 const Prova = ({ children }) => {
@@ -80,7 +77,7 @@ const Prova = ({ children }) => {
 
   return (
     <StyledHeader>
-      <Navbar className="justify-content-end grigio" expand="lg">
+      <Navbar className="justify-content-end " expand="lg">
         <Container className='text-right'>
           <Link className={location.pathname === '/login' ? 'nav-link active' : 'nav-link'} to="/">
             <h2 >LastWorld</h2>
