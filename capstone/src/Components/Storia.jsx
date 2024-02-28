@@ -6,7 +6,8 @@ import { Element, scroller } from 'react-scroll';
 import head from "./Assets/Scena-5_Arrabb.png";
 import { Col, Container, Row } from 'react-bootstrap';
 import 'animate.css';  // Import animate.css
-import foto1 from "./Assets/Screen-1.png";
+import foto1 from "./Assets/zyro-image_4.png";
+import foto2 from "./Assets/LUPIO_NOSFONDO.png";
 
 const Storia = () => {
   const [showText, setShowText] = useState(false);
@@ -36,7 +37,7 @@ const Storia = () => {
       <div className='100-wh'>
       <Row>
       <Col  className='col-3 d-none d-md-flex justify-content-center  align-items-center'>
-      <img className='animate__animated animate__slideInLeft' src={foto1} width={100 + "px"} height={200 + "px"}/>
+      <img className='animate__animated animate__slideInLeft' src={foto1} width={300 + "px"} />
       </Col>
       
       
@@ -53,6 +54,10 @@ const Storia = () => {
 
                 Perchè lo utilizziamo?
             </p>
+
+            <div className='text-center'>
+              <img style={{border: "3px solid black"}} width={400} className='rounded text-center animate__animated animate__flipInX' src={head} alt="foto Personaggio" />
+              </div>
             <p className='animate__animated animate__fadeInLeft text-white bg-secondary p-2 m-3 rounded'>
                 È universalmente riconosciuto che un lettore che osserva il layout di una pagina viene distratto dal contenuto testuale se questo è leggibile. Lo scopo dell’utilizzo del Lorem Ipsum è che offre una normale distribuzione delle lettere (al contrario di quanto avviene se si utilizzano brevi frasi ripetute, ad esempio “testo qui”), apparendo come un normale blocco di testo leggibile. Molti software di impaginazione e di web design utilizzano Lorem Ipsum come testo modello. Molte versioni del testo sono state prodotte negli anni, a volte casualmente, a volte di proposito (ad esempio inserendo passaggi ironici).
 
@@ -63,7 +68,7 @@ const Storia = () => {
             </Col>
 
             <Col className='col-3 d-none d-md-flex justify-content-center align-items-center '>
-      <img className='animate__animated animate__slideInRight' src={foto1} width={100 + "px"} height={200 + "px"}/>
+      <img className='animate__animated animate__slideInRight' src={foto2} width={300 + "px"}/>
       </Col>
         
             </Row>

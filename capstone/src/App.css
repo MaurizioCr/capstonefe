@@ -9,7 +9,7 @@ html{
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-
+background: url(./Components/Assets/foto1.jpg);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -18,12 +18,24 @@ html{
   }
 }
 
+.absolute{
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+
 body{
   background: url(./Components/Assets/foto1.jpg);
   background-size:auto;
   background-position-x: center;
 }
-
+.blu{
+  color: rgb(0 19 255) !important;
+}
 p{
   margin: 0 !important;
 }
@@ -66,14 +78,37 @@ input{
 
 .b{
   border: 3px solid black !important;
-  background: url(./Components/Assets/carletto.jpeg) !important;
-  background-position-y: center !important;
-  background-size: cover !important;
-  color: rgb(238, 0, 255) !important;
+  color: rgb(206 34 87) !important;
   font-weight:bolder;
   font-size: 1.5em;
   overflow: hidden !important
 }
+.update{
+  background: url(./Components/Assets/Screen-1.png) !important;
+  background-position-y: center !important;
+  background-size: cover !important;
+}
+
+.storia{
+  background: url(./Components/Assets/Scena-2.png) !important;
+  background-position-y: center !important;
+  background-size: cover !important;
+}
+
+.feedback{
+  background: url(./Components/Assets/Screen-3.png) !important;
+  background-position-y: center !important;
+  background-size: cover !important;
+  color:rgb(0 19 255 / 90%) !important;
+}
+.social{
+  background: url(./Components/Assets/Screen-4.png) !important;
+  background-position-y: center !important;
+  background-size: cover !important;
+  color:rgb(0 19 255 / 90%) !important;
+}
+
+
 
 @keyframes App-logo-spin {
   from {
