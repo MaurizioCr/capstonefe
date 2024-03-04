@@ -34,7 +34,7 @@ const ProductList = () => {
         {Array.isArray(products) &&
           products.map(product => (
             <Row className='justify-content-center'>
-            <Col className=' rounded col-3'>
+            <Col className=' rounded col-10 col-md-3'>
             <Card  className="border border-black" key={product.id}>
               {product.immagine && (
                 <img

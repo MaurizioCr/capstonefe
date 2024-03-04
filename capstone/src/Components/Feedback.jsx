@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Card, Stack, Col, Row, Container } from 'react-bootstrap';
+import { Form, Button, Card, Stack, Col, Row, Container, Spinner } from 'react-bootstrap';
 import styled, { keyframes } from 'styled-components';
 
 const FeedbackWrapper = styled.div`
@@ -38,58 +38,72 @@ const Feedback = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [feedback, setFeedback] = useState("");
   const [votoFeedback, setVotoFeedback] = useState(6);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    
-  useEffect(() => {
-    // Fetch per ottenere tutti i feedbacks
-    const fetchFeedbacks = async () => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND}/feedbacks`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-          },
-        });
+  const fetchFeedbacks = () => {
+    setLoading(true);
+    setError(null);
 
+    fetch(`${process.env.REACT_APP_BACKEND}/feedbacks`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+      },
+    })
+      .then(response => {
         if (response.ok) {
-          const data = await response.json();
-          setFeedbacks(data);
+          return response.json();
         } else {
-          console.error('Errore durante il recupero dei feedbacks.');
+          throw new Error('Errore durante il recupero dei feedbacks.');
         }
-      } catch (error) {
-        console.error('Errore durante la richiesta dei feedbacks:', error);
-      }
-    };
-
-    fetchFeedbacks();
-  }, []); //Solo avvio
-
-  const handleAddFeedback = async () => {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND}/feedbacks`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-        },
-        body: JSON.stringify({
-          feedback: feedback,
-          votoFeedback: votoFeedback,
-        }),
+      })
+      .then(data => {
+        setFeedbacks(data);
+      })
+      .catch(error => {
+        setError('Errore durante la richiesta dei feedbacks.');
+      })
+      .finally(() => {
+        setLoading(false);
       });
-
-      if (response.ok) {
-        const updatedFeedbacks = await response.json();
-        setFeedbacks(updatedFeedbacks);
-        setFeedback(""); // Resetta il campo input del feedback
-        setVotoFeedback(8); // Resetta il campo input del voto
-      } else {
-        console.error('Errore durante l\'aggiunta del feedback.');
-      }
-    } catch (error) {
-      console.error('Errore durante la richiesta di aggiunta del feedback:', error);
-    }
   };
+
+  useEffect(() => {
+    fetchFeedbacks();
+  }, []); // Solo avvio
+
+  const handleAddFeedback = () => {
+    setError(null);
+
+    fetch(`${process.env.REACT_APP_BACKEND}/feedbacks`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+      },
+      body: JSON.stringify({
+        feedback: feedback,
+        votoFeedback: votoFeedback,
+      }),
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Errore durante l\'aggiunta del feedback.');
+        }
+      })
+      .then(updatedFeedbacks => {
+        setFeedbacks(updatedFeedbacks);
+        setFeedback("");
+        setVotoFeedback(8);
+      })
+      .catch(error => {
+        setError('Errore durante la richiesta di aggiunta del feedback.');
+      });
+  };
+
+
 
   
 
@@ -130,12 +144,17 @@ return (
             Aggiungi Feedback
           </Button>
         </Form>
+        {loading && (
+            <div className="text-center mt-3">
+              <Spinner animation="border" variant="light" />
+            </div>
+          )}
       </Container>
 
       <Container className='mt-3 mb-5'>
         <Row xs={1} md={2} lg={3} xl={4} className="g-4">
-          {Array.isArray(feedbacks) && feedbacks.map((feedback) => (
-            <Col className='' key={feedback.id}>
+          {Array.isArray(feedbacks) && feedbacks.map((feedback, index) => (
+            <Col className='' key={index}>
               <StyledCard className=' rounded'>
                 <Card className="background text-white h-100">
                   <Card.Body>

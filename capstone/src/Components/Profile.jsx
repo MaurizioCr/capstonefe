@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Col, Container, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
+import { Button, Col, Container, FormControl, FormGroup, FormLabel, Row, Spinner } from 'react-bootstrap';
 
 const UserProfile = () => {
-    const [user, setUser] = useState({});
-    const [updatedUser, setUpdatedUser] = useState({});
-    const [editMode, setEditMode] = useState(false);
-    const [avatarFile, setAvatarFile] = useState({});
-    const [saveClicked, setSaveClicked] = useState(false);
+  const [user, setUser] = useState({});
+  const [updatedUser, setUpdatedUser] = useState({});
+  const [editMode, setEditMode] = useState(false);
+  const [avatarFile, setAvatarFile] = useState({});
+  const [saveClicked, setSaveClicked] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchUserData();
@@ -42,6 +43,8 @@ const UserProfile = () => {
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
+    } finally {
+      setLoading(false); // Set loading to false after data is fetched
     }
   };
 
@@ -56,6 +59,7 @@ const UserProfile = () => {
   const handleFileChange = (e) => {
     setAvatarFile(e.target.files[0]);
   };
+
   
   const handleUpdateProfile = async () => {
     try {
@@ -169,21 +173,28 @@ const UserProfile = () => {
 
   return (
     <>
+    {loading && (
+        <Col className="text-center d-flex justify-content-center align-items-center mt-3">
+          <Spinner animation="border" variant="light" />
+        </Col>
+      )}
+  {!loading && (    
     <Container className='text-left'>
       <Row className='justify-content-center'>
-        <Col className='bg-dark relative col-md-4 col-lg-5 pt-2 border border-danger ' key={user.id}>
-          <div className='text-white '>
+        <Col className='bg-dark relative col-md-4 col-lg-5 pt-2 border border-danger mt-3' key={user.id}>
+          <div className='text-white'>
             <p>Nome: {user.nome}</p>
             <p>Cognome: {user.cognome}</p>
             <p>Email: {user.email}</p>
             <p>Username: {user.username}</p>
             <div className='justify-content-center d-flex pb-3' >
-              <img  src={user.avatar} alt="avatar"></img>
+              <img  src={user.avatar} width={150 +"px"} alt="avatar"></img>
             </div>
           </div>
         </Col>
       </Row>
     </Container>
+    )}
 
 
       {editMode ? (

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import styled from "styled-components";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Spinner } from 'react-bootstrap';
 
 
 const StyledHeader = styled.div`
@@ -44,24 +44,34 @@ const ZoomBox = styled.div`
 const Home = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true); //aggiunto loading
   const isAuthenticated = !!localStorage.getItem("authToken");
+
+  useEffect(() => {
+    setLoading(false); 
+  }, []); 
 
   function logout() {
     localStorage.removeItem("authToken");
-    // Aggiungo un reindirizzamento al login dopo il logout
     navigate("/");
   }
 
   return (
     <StyledHeader>
-  
-      {!isAuthenticated && (
-        <LoginPrompt>
-          <p> <a className='text-black' href="/login">Accedi</a> per vedere i contenuti</p>
-        </LoginPrompt>
+    {loading && (
+        <Col className="text-center d-flex justify-content-center align-items-center mt-3">
+          <Spinner animation="border" variant="light"  />
+        </Col>
       )}
   
-      {isAuthenticated && (
+      {!loading && !isAuthenticated && (
+    <LoginPrompt>
+    <p>
+      <a className='text-black' href="/login">Accedi</a> o <a className='text-black' href="/register">Registrati</a> per vedere i contenuti
+    </p>
+  </LoginPrompt>
+)}
+      {!loading && isAuthenticated && (
         <Container>
           <Row className='justify-content-center'>
             <Col className="col1 col-md-4 col-lg-2 mx-3 p-4 border border-black b mt-5 text-center update rounded" md={{ span: 2, offset: 2 }}><ZoomBox><p className='hover' onClick={() => navigate("/Update")}>Update</p></ZoomBox></Col>
@@ -70,7 +80,7 @@ const Home = ({ children }) => {
             <Col className="col1 col-md-4 col-lg-2 mx-3 p-4 border border-black b mt-5 text-center social rounded" md="2"><ZoomBox><p className='hover' onClick={()=> navigate("/Social")}>Social</p></ZoomBox></Col>
           </Row>
           <Row className='text-light justify-content-center mx-auto mt-5'>
-          <Col className='col-12 col-md-9 bg-success  p-3 rounded'>
+          <Col className='col-12 col-md-9 bg-success  pt-3 px-3 pb-1 rounded' style={{opacity: 0.8}}>
           <h4 >Quanta possibilità hanno 2 fratelli  di creare il videogioco dei loro sogni partendo da Zero competenze e Zero budget? Con grande piacere vi presentiamo The Last Worlds, dopo 4 anni di studio, lavoro e dedizione vogliamo lasciare
            un' impronta sul settore videoludico. I nostri progetti INDIE hanno come base l' originalità,  la ricerca della creatività e soprattutto la passione che trasforma i sogni in realtà. Uno dei nostri obiettivi è quello di rivoluzionare il
            mondo videoludico abbattendo le barriere tra player e sviluppatori. Vogliamo dare la possibilità a tutti di esprimersi e di lasciare la propria idea e cercare di svilupparla per quanto possibile. In un ambiente dove consumatore e produttore 

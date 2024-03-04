@@ -12,13 +12,16 @@ import MyNavbar from './Components/MyNavbar'
 import Social from './Components/Social'
 import Storia from './Components/Storia'
 import Profile from "./Components/Profile"
+import CartItem from './Components/Cart';
+import ProductList from './Components/ProductList';
+import Update from "./Components/Update";
 
 
 function App() {
   return (
     
     <BrowserRouter>
-      <div className="d-flex flex-column h-100">
+      <div className="d-flex flex-column">
         <div className="flex-grow-1">
         <MyNavbar/>
           <Routes>
@@ -29,11 +32,14 @@ function App() {
             <Route element={<Feedback/>} path="/feedback"/>
             <Route element={<Social/>} path="/social"/>
             <Route element={<Storia/>} path="/storia"/>
+            <Route element={<CartItem/>} path="/cart"/>
+            <Route element={<Update/>} path="/update"/>
+            <Route element={<ProductList/>} path="/buy"/>
             <Route element={<NotFound />} path="*" />
           </Routes>
         </div>
         <footer className="text-center" >
-          LastWorld {new Date().getFullYear()}
+          <p className='text-center'>© LastWorld {new Date().getFullYear()}</p>
         </footer>
       </div>
     </BrowserRouter>
