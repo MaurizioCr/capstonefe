@@ -5,13 +5,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import styled from "styled-components";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Col, Dropdown, Row } from 'react-bootstrap';
+import Logo from "./Assets/Scritta_SenzaSfondo.png"
 
 const StyledHeader = styled.div`
 
   position: sticky;
   top: 0;
   z-index: 1000; /* Assicura che l'header rimanga sopra gli altri elementi */
-  background: rgba(128, 128, 128, 0.4);
+  background-image: linear-gradient(140deg, #6fcc54, #198754);
   
   .contentend {
     justify-content: end !important;
@@ -77,11 +78,18 @@ const Prova = ({ children }) => {
 
   return (
     <StyledHeader>
-      <Navbar className="justify-content-end " expand="lg">
+      <Navbar className="justify-content-end" expand="lg">
         <Container className='text-right'>
-          <Link className={location.pathname === '/login' ? 'nav-link active' : 'nav-link'} to="/">
-            <h2 >LastWorld</h2>
-          </Link>
+          
+          <Navbar.Brand href="/" ><img
+              src={Logo}
+              width={250}
+              height={50}
+              className="d-inline-block align-top"
+              
+              alt="React Bootstrap logo"
+            /></Navbar.Brand>
+          
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end contentend">
               <Nav className="ml-auto d-flex">
@@ -113,7 +121,7 @@ const Prova = ({ children }) => {
                         <Dropdown.Item className="text-black" as={Link} to="/buy">
                           Acquista
                         </Dropdown.Item>
-                        <Dropdown.Item onClick={logout} className="text-black" as={Link} to="/buy">
+                        <Dropdown.Item onClick={logout} className="text-black" as={Link} to="/">
                           Logout
                         </Dropdown.Item>
                       </Dropdown.Menu>
