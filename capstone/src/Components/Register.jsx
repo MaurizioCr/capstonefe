@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
+import { EmojiAngryFill } from "react-bootstrap-icons";
 import styled from "styled-components";
 
 const StyledRegister = styled.div`
-  background-color: #ffffffec;
-  ${'' /* padding:0em 10em 0em 10em; */}
-  border: 2px solid #03999ec6;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  flex-direction: column;
-  width: 20%;
+    background-color: #ffffffec;
+    border: 2px solid #03999ec6;
+    border-radius: 40px;
+    margin: 1em;
+    padding: 2em;
+    min-width: 350px;
+    width: 20%;
+    margin: 0 auto;
+    opacity: 0.8;
   h3 {
     text-align: center;
     margin: 1em 0;
@@ -70,29 +70,32 @@ export default function Register() {
         <h3>Registrati</h3>
         <form id="register-form">
           <InputGroup className="d-flex flex-column w-100">
-            <Form.Label className="text-center fs-5">Username</Form.Label>
+            
           </InputGroup>
           <Form.Control
+            placeholder="Username"
             required
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
             }}
           ></Form.Control>
-          <InputGroup className="d-flex flex-column w-100">
-            <Form.Label className="text-center fs-5 ">Email</Form.Label>
+          <InputGroup className="d-flex flex-column pt-4 w-100">
+            
           </InputGroup>
           <Form.Control
+          placeholder="Email"
             required
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
           ></Form.Control>
-          <InputGroup className="d-flex flex-column w-100">
-            <Form.Label className="text-center fs-5">Password</Form.Label>
+          <InputGroup className="d-flex flex-column pt-3 w-100">
+            <Form.Label className="text-center fs-5"></Form.Label>
           </InputGroup>
           <Form.Control
+            placeholder="Password"
             type="password"
             required
             value={password}
@@ -100,20 +103,22 @@ export default function Register() {
               setPassword(e.target.value);
             }}
           ></Form.Control>
-          <InputGroup className="d-flex flex-column w-100">
-            <Form.Label className="text-center fs-5">Nome</Form.Label>
+          <InputGroup className="d-flex flex-column pt-4 w-100">
+            
           </InputGroup>
           <Form.Control
+            placeholder="Nome"
             required
             value={nome}
             onChange={(e) => {
               setNome(e.target.value);
             }}
           ></Form.Control>
-          <InputGroup className="d-flex flex-column w-100">
-            <Form.Label className="text-center fs-5">Cognome</Form.Label>
+          <InputGroup className="d-flex flex-column pt-4 w-100">
+
           </InputGroup>
           <Form.Control
+            placeholder="Cognome"
             required
             value={cognome}
             onChange={(e) => {

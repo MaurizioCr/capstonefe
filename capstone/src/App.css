@@ -1,6 +1,4 @@
-.App {
-  text-align: center;
-}
+
 html{
   position: relative;
   min-height: 97% !important;
@@ -10,12 +8,6 @@ html{
   height: 40vmin;
   pointer-events: none;
 background: url(./Components/Assets/foto1.jpg);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .absolute{
@@ -28,13 +20,29 @@ background: url(./Components/Assets/foto1.jpg);
   display: block !important;
 }
 
+@media only screen and (max-width: 767px) {
+  .video-frame {
+    width: auto;
+    height: auto; 
+  }
+}
+
+
 body{
-  background: url(./Components/Assets/foto1.jpg);
-  background-size:auto;
-  background-position-x: center;
+  background: url(./Components/Assets/Scenja8-.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 .blu{
   color: rgb(0 19 255) !important;
+}
+.blusfondo{
+  background-color: rgb(0 19 255) !important;
+}
+.rosso{
+  background-color: rgb(206 34 87) !important;
 }
 p{
   margin: 0 !important;
@@ -59,21 +67,6 @@ input{
 
 .gioco{
   background-size: contain;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 .b{
@@ -106,17 +99,6 @@ input{
   background-position-y: center !important;
   background-size: cover !important;
   color:rgb(0 19 255 / 90%) !important;
-}
-
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 footer {

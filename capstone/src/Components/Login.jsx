@@ -12,11 +12,17 @@ const StyledLogin = styled.div`
   min-width: 350px;
   width: 20%;
   margin: 0 auto;
+  opacity:0.8;
 
   .save-button {
     background-color: #03989e;
     border-color: #03989e;
     margin-top: 1em;
+  }
+  h3 {
+    text-align: center;
+    margin: 1em 0;
+    color: #02657b;
   }
 `;
 export default function Login() {
@@ -44,8 +50,6 @@ export default function Login() {
         }
       })
       .then((data) => {
-        //Controlli token ed id
-        console.log("Risposta del server:", data);
         const userId = data.id; 
         localStorage.setItem("authToken", data.token);
         localStorage.setItem("userId", userId);
@@ -57,22 +61,22 @@ export default function Login() {
   return (
     <StyledLogin>
       <form id="login-form">
-        <InputGroup className="d-flex flex-column w-100">
-          <Form.Label className="text-center fs-5">Email</Form.Label>
-        </InputGroup>
+        <h3>Accedi</h3>
+        
         <Form.Control
           required
+          placeholder="Email"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
         ></Form.Control>
-        <InputGroup className="d-flex flex-column w-100">
-          <Form.Label className="text-center fs-5 mt-3">Password</Form.Label>
+        <InputGroup className="d-flex flex-column pt-4 w-100">
         </InputGroup>
         <Form.Control
           type="password"
           required
+          placeholder="Password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
