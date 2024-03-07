@@ -133,6 +133,7 @@ return (
             <Form.Control
               type="number"
               max={10}
+              min={0}
               placeholder="Inserisci il voto"
               value={votoFeedback}
               onChange={(e) => setVotoFeedback(parseInt(e.target.value))}

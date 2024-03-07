@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import immagine from "./Assets/Logo.jpeg"
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -38,7 +39,7 @@ const ProductList = () => {
             <Card  className="border border-black" key={product.id}>
               {product.immagine && (
                 <img
-                  src="https://www.codiciprodotto.it/wp-content/uploads/2022/02/god-of-war-pc-game-steam-cover-1.jpg"
+                  src={immagine}
                   alt="Product"
                 />
               )}

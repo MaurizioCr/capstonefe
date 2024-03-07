@@ -39,7 +39,7 @@ function App() {
           </Routes>
         </div>
         <footer className="text-center" >
-          <p className='text-center'>© LastWorld {new Date().getFullYear()}</p>
+          <p className='text-center'>© LastWorlds {new Date().getFullYear()}</p>
         </footer>
       </div>
     </BrowserRouter>
