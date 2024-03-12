@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { EmojiAngryFill } from "react-bootstrap-icons";
 import styled from "styled-components";
 
@@ -10,7 +10,7 @@ const StyledRegister = styled.div`
     margin: 1em;
     padding: 2em;
     min-width: 350px;
-    width: 20%;
+    width: 30%;
     margin: 0 auto;
     opacity: 0.8;
   h3 {
@@ -23,9 +23,22 @@ const StyledRegister = styled.div`
     background-color: #03989e;
     border-color: #03989e;
   }
+  .avatar-option.selected {
+  border: 2px solid #03989e;
+  
+}
 `;
 
 export default function Register() {
+  const defaultAvatars = [
+    "https://wallpapers.com/images/hd/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg",
+    "https://wallpapers.com/images/hd/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg",
+    "https://wallpapers.com/images/hd/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg",
+    "https://wallpapers.com/images/hd/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg",
+    "https://wallpapers.com/images/hd/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg",
+  ];
+  const [selectedAvatar, setSelectedAvatar] = useState("");
+  
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,6 +47,9 @@ export default function Register() {
   const [role, setRole] = useState("USER");
 
   function registraUtente() {
+    const selectedAvatarUrl = defaultAvatars[selectedAvatar];
+    console.log("Selected Avatar URL:", selectedAvatarUrl);
+  
     fetch(`${process.env.REACT_APP_BACKEND}/auth/register`, {
       method: "POST",
       headers: {
@@ -46,24 +62,28 @@ export default function Register() {
         nome: nome,
         cognome: cognome,
         role: role,
+        avatar: selectedAvatarUrl,
       }),
     })
       .then((response) => {
         if (response.ok) {
+          console.log("Selected Avatar URL:", selectedAvatarUrl);
           setUsername("");
           setEmail("");
           setPassword("");
           setNome("");
           setCognome("");
           setRole("USER");
+          setSelectedAvatar(""); // Resetta anche l'avatar selezionato
           window.alert("Registrazione Effettuata con successo!");
         } else {
-          throw new Error("errore nella fetch");
+          throw new Error("Errore nella fetch");
         }
       })
-      .catch((err) => console.log("ERRORE!", err));
-  }
+      .catch((err) => console.log("ERRORE!", err)) ;
+    console.log("Selected Avatar URL:", selectedAvatarUrl);
 
+  }
   return (
     <StyledRegister className="pb-4">
       <div className="inner">
@@ -135,6 +155,31 @@ export default function Register() {
               Registrati
             </Button>
           </div>
+          <InputGroup className="d-flex flex-column pt-4 w-100">
+  <Form.Label className="text-center fs-5">Seleziona un'immagine:</Form.Label>
+  <div className="avatar-options">
+  <Row className="justify-content-center">
+    {defaultAvatars.map((avatar, index) => (
+      <Col
+        key={index}
+        className={`avatar-option ${selectedAvatar === index ? 'selected' : ''}`}
+        onClick={() => setSelectedAvatar(index)}
+        style={{
+          backgroundImage: `url(${avatar})`,
+          backgroundSize: 'cover',
+          width: '50px',
+          height: '50px',
+          borderRadius: '50%',
+          margin: '0 10px',
+          cursor: 'pointer',
+          backgroundPosition: 'center',
+        }}
+      ></Col>
+    ))}
+  </Row>
+  </div>
+</InputGroup>
+
         </form>
       </div>
     </StyledRegister>
