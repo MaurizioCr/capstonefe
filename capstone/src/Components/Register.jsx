@@ -32,10 +32,10 @@ const StyledRegister = styled.div`
 export default function Register() {
   const defaultAvatars = [
     "https://wallpapers.com/images/hd/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg",
-    "https://wallpapers.com/images/hd/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg",
-    "https://wallpapers.com/images/hd/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg",
-    "https://wallpapers.com/images/hd/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg",
-    "https://wallpapers.com/images/hd/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg",
+    "https://images.everyeye.it/img-notizie/god-of-war-tre-curiositA-atreus-non-conoscete-v6-638848-1200x1200.webp",
+    "https://www.backdoorbs.com/cdn/shop/files/84015.jpg?v=1687709871",
+    "https://www.sportitalia.it/wp-content/uploads/2024/01/Kvicha-Kvaratskhelia-20240115-sportitalia.jpg",
+    "https://upload.wikimedia.org/wikipedia/it/thumb/9/9e/Benvenuti_a_Magix%21_%28Bloom%29.png/1200px-Benvenuti_a_Magix%21_%28Bloom%29.png",
   ];
   const [selectedAvatar, setSelectedAvatar] = useState("");
   
@@ -48,25 +48,27 @@ export default function Register() {
 
   function registraUtente() {
     const selectedAvatarUrl = defaultAvatars[selectedAvatar];
-    console.log("Selected Avatar URL:", selectedAvatarUrl);
   
-    fetch(`${process.env.REACT_APP_BACKEND}/auth/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password,
-        nome: nome,
-        cognome: cognome,
-        role: role,
-        avatar: selectedAvatarUrl,
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
+    if (selectedAvatar >= 0 && selectedAvatar < defaultAvatars.length && selectedAvatarUrl) {
+      console.log("Selected Avatar URL:", selectedAvatarUrl);
+  
+      fetch(`${process.env.REACT_APP_BACKEND}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          email: email,
+          password: password,
+          nome: nome,
+          cognome: cognome,
+          role: role,
+          avatar: selectedAvatarUrl,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
           console.log("Selected Avatar URL:", selectedAvatarUrl);
           setUsername("");
           setEmail("");
@@ -80,10 +82,11 @@ export default function Register() {
           throw new Error("Errore nella fetch");
         }
       })
-      .catch((err) => console.log("ERRORE!", err)) ;
-    console.log("Selected Avatar URL:", selectedAvatarUrl);
-
+      .catch((err) => console.log("ERRORE!", err));
+  } else {
+    console.log("Avatar predefinito non valido");
   }
+}
   return (
     <StyledRegister className="pb-4">
       <div className="inner">
@@ -156,7 +159,7 @@ export default function Register() {
             </Button>
           </div>
           <InputGroup className="d-flex flex-column pt-4 w-100">
-  <Form.Label className="text-center fs-5">Seleziona un'immagine:</Form.Label>
+  <Form.Label className="text-center fs-5">Seleziona un avatar:</Form.Label>
   <div className="avatar-options">
   <Row className="justify-content-center">
     {defaultAvatars.map((avatar, index) => (
